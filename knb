@@ -286,7 +286,7 @@ function run-client {
 	spec:
 	  containers:
 	  - name: iperf
-	    image: infrabuilder/bench-iperf3
+	    image: rezareza/bench-iperf3
 	    args:
 	    - /bin/sh
 	    - -c
@@ -1067,7 +1067,7 @@ metadata:
 spec:
   containers:
   - name: monitor
-    image: infrabuilder/bench-custom-monitor
+    image: rezareza/bench-custom-monitor
   nodeSelector:
     kubernetes.io/hostname: $SERVER_NODE
 EOF
@@ -1090,7 +1090,7 @@ metadata:
 spec:
   containers:
   - name: monitor
-    image: infrabuilder/bench-custom-monitor
+    image: rezareza/bench-custom-monitor
   nodeSelector:
     kubernetes.io/hostname: $CLIENT_NODE
 EOF
@@ -1116,7 +1116,7 @@ metadata:
 spec:
   containers:
   - name: iperf
-    image: infrabuilder/netbench:server-iperf3
+    image: rezareza/server-iperf3
     args:
     - iperf3
     - -s
