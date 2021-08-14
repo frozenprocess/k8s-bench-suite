@@ -2,6 +2,7 @@ apiVersion: projectcalico.org/v3
 kind: NetworkPolicy
 metadata:
   name: policy100
+  namespace: calico-test
 spec:
   egress:    
     - action: Allow

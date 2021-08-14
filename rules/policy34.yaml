@@ -2,6 +2,7 @@ apiVersion: projectcalico.org/v3
 kind: NetworkPolicy
 metadata:
   name: policy34
+  namespace: calico-test
 spec:
   order: 34
   types:
