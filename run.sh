@@ -50,7 +50,7 @@ RULES=$(kubectl get cnp -n $NAMESPACE | wc -l)
 echo "Running 5 benchmark/s with $RULES rules."
 for I in {1..5}
   do
-    ./knb -cn $CN -sn $SN -m $MULTI -p $PARALLEL -o data -f "results/$PREFIX-$RULES-rules-$I.knbdata"
+    ./knb -cn $CN -sn $SN -m $MULTI -p $PARALLEL -n $NAMESPACE -o data -f "results/$PREFIX-$RULES-rules-$I.knbdata"
     echo "Benchmark $I is done, Waiting for the clean up ..."
     while [ $(kubectl get pods -n $NAMESPACE | wc -l) != "0" ]
     do
