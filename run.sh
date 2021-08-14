@@ -12,10 +12,11 @@ PREFIX=$(kubectl get installation.operator.tigera.io default -o jsonpath='{.spec
 RULES=$(kubectl get cnp | wc -l)
 MULTI="2"
 PARALLEL="2"
+NAMESPACE="calico-test"
 for I in {1..5}
   do
     echo "Running benchmark $I without any rules"
-    ./knb -cn $CN -sn $SN -m $MULTI -p $PARALLEL -n calic-test -o data -f "results/$PREFIX-$RULES-RULES-$I.knbdata"
+    ./knb -cn $CN -sn $SN -m $MULTI -p $PARALLEL -n $NAMESPACE -o data -f "results/$PREFIX-$RULES-RULES-$I.knbdata"
     echo "Benchmark $I completed. Waiting 60 Seconds for the cleanup ..."
     sleep 60
 done

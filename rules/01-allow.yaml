@@ -1,14 +1,14 @@
 apiVersion: projectcalico.org/v3
 kind: NetworkPolicy
 metadata:
-  name: policy100
+  name: policy1000
   namespace: calico-test
 spec:
   egress:    
     - action: Allow
   ingress:
     - action: Allow
-  order: 100
+  order: 1000
   types:
   - Egress
   - Ingress
