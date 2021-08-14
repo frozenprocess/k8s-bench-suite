@@ -1,7 +1,7 @@
 apiVersion: projectcalico.org/v3
 kind: NetworkPolicy
 metadata:
-  name: policy 88
+  name: policy88
   namespace: calico-test
 spec:
   order: 88

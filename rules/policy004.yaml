@@ -1,7 +1,7 @@
 apiVersion: projectcalico.org/v3
 kind: NetworkPolicy
 metadata:
-  name: policy  4
+  name: policy4
   namespace: calico-test
 spec:
   order: 4
