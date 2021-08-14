@@ -304,6 +304,7 @@ function run-client {
 	  containers:
 	  - name: iperf
 	    image: infrabuilder/bench-iperf3
+	    imagePullPolicy: IfNotPresent
 	    args:
 	    - /bin/sh
 	    - -c
@@ -382,6 +383,7 @@ function initialize-plotly-pod {
 	  containers:
 	  - name: plotly-orca
 	    image: quay.io/plotly/orca
+	    imagePullPolicy: IfNotPresent
 	  restartPolicy: Never
 	EOF
 
@@ -1109,6 +1111,7 @@ spec:
   containers:
   - name: monitor
     image: infrabuilder/bench-custom-monitor
+    imagePullPolicy: IfNotPresent
   nodeSelector:
     kubernetes.io/hostname: $SERVER_NODE
 EOF
@@ -1132,6 +1135,7 @@ spec:
   containers:
   - name: monitor
     image: infrabuilder/bench-custom-monitor
+    imagePullPolicy: IfNotPresent
   nodeSelector:
     kubernetes.io/hostname: $CLIENT_NODE
 EOF
@@ -1172,6 +1176,7 @@ spec:
   containers:
   - name: iperf
     image: infrabuilder/netbench:server-iperf3
+    imagePullPolicy: IfNotPresent
     command: ["/bin/bash", "-c"]
     args: ["$SERVER_PROCESS"]
   nodeSelector:
