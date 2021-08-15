@@ -73,7 +73,7 @@ spec:
       selector: IP-deny-list == 'true'
 EOF
 
-RULES=$(kubectl GlobalNetworkSet | wc -l)
+RULES=$(kubectl get GlobalNetworkSet | wc -l)
 
 echo "Running 5 benchmark/s with $RULES rules."
 for I in {1..5}
