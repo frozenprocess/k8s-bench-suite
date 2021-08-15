@@ -5,6 +5,13 @@ then
     exit
 fi
 
+if ! command -v calicoctl &> /dev/null
+then
+    echo "calicoctl could not be found."
+    echo "checkout https://docs.projectcalico.org/archive/v3.20/getting-started/clis/calicoctl/install"
+    exit
+fi
+
 CN="multistream-worker"
 SN="multistream-worker2"
 PREFIX=$(kubectl get installation.operator.tigera.io default -o jsonpath='{.spec.calicoNetwork.linuxDataplane}')
@@ -12,7 +19,7 @@ PREFIX=$(kubectl get installation.operator.tigera.io default -o jsonpath='{.spec
 MULTI="2"
 PARALLEL="2"
 NAMESPACE="calico-test"
-RULES=$(kubectl get cnp -n $NAMESPACE | wc -l)
+RULES=$(kubectl get GlobalNetworkSet | wc -l)
 
 # Making sure test namespace exists
 kubectl apply -f - <<EOF
@@ -36,9 +43,9 @@ for I in {1..5}
 done
 
 echo "Importing 100 security to block 100,000 ips."
-kubectl apply -f rules
+calicoctl apply -f rules
 
-kubectl apply -f - <<EOF
+calicoctl apply -f - <<EOF
 apiVersion: projectcalico.org/v3
 kind: GlobalNetworkPolicy
 metadata:
@@ -66,7 +73,7 @@ spec:
       selector: IP-deny-list == 'true'
 EOF
 
-RULES=$(kubectl get cnp -n $NAMESPACE | wc -l)
+RULES=$(kubectl GlobalNetworkSet | wc -l)
 
 echo "Running 5 benchmark/s with $RULES rules."
 for I in {1..5}
@@ -81,7 +88,8 @@ for I in {1..5}
 done
 
 echo "Cleaning up rules"
-kubectl delete -f rules
+calicoctl delete -f rules
+calicoctl delete gnp allow-egress deny-egress
 kubectl delete ns $NAMESPACE
 
 # I'm done!
