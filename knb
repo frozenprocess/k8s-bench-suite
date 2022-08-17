@@ -383,6 +383,8 @@ function initialize-plotly-pod {
 	  - name: plotly-orca
 	    image: quay.io/plotly/orca
 	  restartPolicy: Never
+	  nodeSelector:
+	    kubernetes.io/arch: amd64
 	EOF
 
 	RESOURCE_TO_CLEAN_BEFORE_EXIT="$RESOURCE_TO_CLEAN_BEFORE_EXIT pod/$POD_NAME"
